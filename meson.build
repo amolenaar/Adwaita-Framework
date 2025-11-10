@@ -8,7 +8,7 @@ project(
     'glib:sysprof=disabled',
     'glib:tests=false',
     # cairo
-    # cairo: to do patch out util subdir, as it depends on lzo
+    # cairo: to do patch out cairo-scripts subdir, as it depends on lzo
     'cairo:fontconfig=disabled',
     'cairo:xcb=disabled',
     'cairo:xlib=disabled',
@@ -26,6 +26,14 @@ project(
     'pango:freetype=disabled',
     'pango:build-testsuite=false',
     'pango:build-examples=false',
+    # glycin
+    # todo: build glycin first
+    # gdk-pixbuf
+    # 'gdk-pixbuf:glycin=enable',
+    'gdk-pixbuf:documentation=false',
+    'gdk-pixbuf:introspection=disabled',
+    'gdk-pixbuf:relocatable=true',
+    'gdk-pixbuf:tests=false',
     # librsvg
     'librsvg:introspection=disabled',
     # gtk
@@ -43,8 +51,6 @@ project(
   ]
 )
 
-introspection = 'disabled'
-
 # librsvg >= 2.48.0 - done
 # pango -> fix version
 # gtk -> fix version
@@ -57,7 +63,7 @@ introspection = 'disabled'
 subproject('glib')
 subproject('cairo')
 subproject('pango')
-# subproject('gdk-pixbuf')
+subproject('gdk-pixbuf')
 subproject('librsvg')
-# subproject('gtk')
+subproject('gtk')
 # subproject('libadwaita')

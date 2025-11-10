@@ -1,0 +1,17 @@
+diff --git a/meson.build b/meson.build
+index 4051a7c..7289632 100644
+--- a/meson.build
++++ b/meson.build
+@@ -578,9 +578,9 @@ if zlib_dep.found()
+   }]
+ endif
+ 
+-if zlib_dep.found()
+-  conf.set('CAIRO_HAS_INTERPRETER', 1)
+-endif
++#if zlib_dep.found()
++#  conf.set('CAIRO_HAS_INTERPRETER', 1)
++#endif
+ 
+ bfd_dep = cc.find_library('bfd', has_headers: ['bfd.h'], required: get_option('symbol-lookup'))
+ if bfd_dep.found() and \

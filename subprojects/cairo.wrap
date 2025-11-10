@@ -4,6 +4,7 @@ url = https://gitlab.freedesktop.org/cairo/cairo.git
 push-url = ssh://git@gitlab.freedesktop.org:cairo/cairo.git
 revision = 1.18.2
 depth = 1
+diff_files=cairo.patch
 
 [provide]
 cairo = libcairo_dep

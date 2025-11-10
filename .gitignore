@@ -1,9 +1,8 @@
 subprojects/*
 !subprojects/gdk-pixbuf.wrap
-!subprojects/fontconfig.wrap
 !subprojects/glib.wrap
 !subprojects/libadwaita.wrap
 !subprojects/librsvg.wrap
 !subprojects/pango.wrap
 !subprojects/cairo.wrap
-
+!subprojects/packagefiles/

@@ -10,6 +10,14 @@ We need some tools from Homebrew:
 brew install itstool rustup cargo-c
 ```
 
+Some prep:
+
+```sh
+python -m venv .venv
+. .venv/bin/activate
+pip install meson ninja gi-docgen docutils
+```
+
 Then, all can be built:
 
 ```sh
