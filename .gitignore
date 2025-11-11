@@ -7,4 +7,5 @@ subprojects/*
 !subprojects/cairo.wrap
 !subprojects/libfyaml.wrap
 !subprojects/appstream.wrap
+!subprojects/gtk.wrap
 !subprojects/packagefiles/
