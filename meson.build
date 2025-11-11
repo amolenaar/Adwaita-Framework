@@ -47,6 +47,13 @@ project(
     'libadwaita:introspection=disabled',
     # gtksourceview: to do
     # appstream
+    # NB. Homebrew has another patch
+    'appstream:systemd=false',
+    'appstream:apidocs=false',
+    'appstream:install-docs=false',
+    'appstream:stemming=false',
+    'appstream:svg-support=false',
+    'appstream:gir=false',
     'appstream:man=false',
   ]
 )
@@ -60,10 +67,11 @@ project(
 # fribidi -> fix version
 # Build gdk-pixbuf before we build librsvg?
 
+subproject('libfyaml')
 subproject('glib')
 subproject('cairo')
 subproject('pango')
 subproject('gdk-pixbuf')
 subproject('librsvg')
 subproject('gtk')
-# subproject('libadwaita')
+subproject('libadwaita')
