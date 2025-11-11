@@ -5,4 +5,6 @@ subprojects/*
 !subprojects/librsvg.wrap
 !subprojects/pango.wrap
 !subprojects/cairo.wrap
+!subprojects/libfyaml.wrap
+!subprojects/appstream.wrap
 !subprojects/packagefiles/

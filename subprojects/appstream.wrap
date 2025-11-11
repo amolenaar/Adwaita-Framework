@@ -1,0 +1,6 @@
+[wrap-git]
+directory = appstream
+url = https://github.com/ximion/appstream.git
+revision = v1.1.1
+depth = 1
+diff_files=appstream.patch

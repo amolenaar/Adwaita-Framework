@@ -1,0 +1,112 @@
+diff --git a/meson.build b/meson.build
+new file mode 100644
+index 0000000..c1f036c
+--- /dev/null
++++ b/meson.build
+@@ -0,0 +1,106 @@
++project('fyaml', 'c',
++  version: '0.9.0',
++  meson_version: '>= 0.56.0',
++  default_options: [
++    'warning_level=1',
++    'c_std=gnu11',
++  ],
++)
++
++cc = meson.get_compiler('c')
++
++# Check for headers and functions
++have_byteswap_h = cc.has_header('byteswap.h')
++have_builtin_bswap16 = cc.has_function('__builtin_bswap16')
++have_builtin_bswap32 = cc.has_function('__builtin_bswap32')
++have_builtin_bswap64 = cc.has_function('__builtin_bswap64')
++
++# Configuration data
++cdata = configuration_data()
++cdata.set('HAVE_BYTESWAP_H', have_byteswap_h)
++cdata.set('HAVE___BUILTIN_BSWAP16', have_builtin_bswap16)
++cdata.set('HAVE___BUILTIN_BSWAP32', have_builtin_bswap32)
++cdata.set('HAVE___BUILTIN_BSWAP64', have_builtin_bswap64)
++
++configure_file(output : 'config.h', configuration : cdata)
++
++libsrcs = files(
++  'src/lib/fy-accel.c',
++  'src/lib/fy-atom.c',
++  'src/lib/fy-composer.c',
++  'src/lib/fy-diag.c',
++  'src/lib/fy-doc.c',
++  'src/lib/fy-docbuilder.c',
++  'src/lib/fy-docstate.c',
++  'src/lib/fy-dump.c',
++  'src/lib/fy-emit.c',
++  'src/lib/fy-event.c',
++  'src/lib/fy-input.c',
++  'src/lib/fy-parse.c',
++  'src/lib/fy-path.c',
++  'src/lib/fy-token.c',
++  'src/lib/fy-types.c',
++  'src/lib/fy-walk.c',
++  'src/util/fy-blob.c',
++  'src/util/fy-ctype.c',
++  'src/util/fy-utf8.c',
++  'src/util/fy-utils.c',
++  'src/xxhash/xxhash.c',
++)
++
++# Public headers
++libhdrspub = files('include/libfyaml.h')
++
++# Compiler arguments
++fyaml_c_args = [
++  '-DVERSION="%0%"'.format(meson.project_version()),
++]
++
++# Add platform-specific flags
++if cc.get_id() != 'msvc'
++  fyaml_c_args += [
++    '-fPIC',
++    '-D_GNU_SOURCE',
++  ]
++endif
++
++# Build type specific flags
++# if get_option('buildtype') != 'debug'
++#   fyaml_c_args += ['-DNDEBUG']
++# endif
++
++# Create the library
++libfyaml = library('fyaml',
++  libsrcs,
++  c_args: fyaml_c_args,
++  include_directories: [
++    include_directories('include'),
++    include_directories('src/lib'),
++    include_directories('src/util'),
++    include_directories('src/xxhash'),
++  ],
++  install: true,
++  version: meson.project_version(),
++)
++
++# Install public headers
++install_headers(libhdrspub, subdir: '.')
++
++# Declare dependency
++fyaml_dep = declare_dependency(
++  link_with: libfyaml,
++  include_directories: include_directories('include'),
++)
++
++# Generate pkg-config file
++# pkg = import('pkgconfig')
++# pkg.generate(
++#   libfyaml,
++#   name: 'libfyaml',
++#   description: 'Fast YAML library',
++#   filebase: 'fyaml',
++#   subdirs: '.',
++# )
++
++# Make the dependency available for use as a subproject
++meson.override_dependency('libfyaml', fyaml_dep)
