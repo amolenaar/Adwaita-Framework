@@ -3,8 +3,8 @@ project(
   'libadwaita-framework',
   version: '1.0',
   default_options: [
-    # 'wrap_mode=forcefallback',
-    'force_fallback_for=gtk,libadwaita,gtksourceview',
+    'wrap_mode=forcefallback',
+    # 'force_fallback_for=cairo,gtk,libadwaita,gtksourceview',
     # pixman
     'pixman:demos=disabled',
     'pixman:gtk=disabled',
