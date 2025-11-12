@@ -2,52 +2,13 @@ project(
   'libadwaita-framework',
   version: '1.0',
   default_options: [
-    'wrap_mode=forcefallback',
-    # glib
-    'glib:introspection=disabled',
-    'glib:sysprof=disabled',
-    'glib:tests=false',
-    # cairo
-    # cairo: to do patch out cairo-scripts subdir, as it depends on lzo
-    'cairo:fontconfig=disabled',
-    'cairo:xcb=disabled',
-    'cairo:xlib=disabled',
-    'cairo:tests=disabled',
-    'cairo:quartz=enabled',
-    'cairo:tests=disabled',
-    'cairo:glib=enabled',
+    # 'wrap_mode=forcefallback',
+    'force-fallback-for=gtk,libadwaita,gtksourceview',
     # pixman
     'pixman:demos=disabled',
     'pixman:gtk=disabled',
-    # pango
-    'pango:introspection=disabled',
-    'pango:fontconfig=disabled',
-    'pango:cairo=enabled',
-    'pango:freetype=disabled',
-    'pango:build-testsuite=false',
-    'pango:build-examples=false',
     # glycin
     # todo: build glycin first
-    # gdk-pixbuf
-    # 'gdk-pixbuf:glycin=enable',
-    'gdk-pixbuf:documentation=false',
-    'gdk-pixbuf:introspection=disabled',
-    'gdk-pixbuf:relocatable=true',
-    'gdk-pixbuf:tests=false',
-    # librsvg
-    'librsvg:introspection=disabled',
-    # gtk
-    # gtk: to do disable test suites
-    'gtk:x11-backend=false',
-    'gtk:print-cups=disabled',
-    'gtk:introspection=disabled',
-    'gtk:media-gstreamer=disabled',
-    # libadwaita
-    'libadwaita:vapi=false',
-    'libadwaita:introspection=disabled',
-    # gtksourceview:
-    'gtksourceview:build-testsuite=false',
-    'gtksourceview:vapi=false',
     # appstream
     # NB. Homebrew has another patch
     'appstream:systemd=false',
@@ -60,21 +21,60 @@ project(
   ]
 )
 
-# librsvg >= 2.48.0 - done
-# pango -> fix version
-# gtk -> fix version
 # libepoxy version?
 # graphene version?
-# glib -> fix version
 # fribidi -> fix version
-# Build gdk-pixbuf before we build librsvg?
 
 subproject('libfyaml')
-subproject('glib')
-subproject('cairo')
-subproject('pango')
-subproject('gdk-pixbuf')
-subproject('librsvg')
-subproject('gtk')
-subproject('libadwaita')
-subproject('gtksourceview')
+subproject('glib', default_options: [
+    'introspection=disabled',
+    'sysprof=disabled',
+    'tests=false'
+])
+subproject('cairo', default_options: [
+    'fontconfig=disabled',
+    'xcb=disabled',
+    'xlib=disabled',
+    'tests=disabled',
+    'quartz=enabled',
+    'tests=disabled',
+    'glib=enabled',
+])
+subproject('pango', default_options: [
+    'introspection=disabled',
+    'fontconfig=disabled',
+    'cairo=enabled',
+    'freetype=disabled',
+    'build-testsuite=false',
+    'build-examples=false',
+])
+subproject('gdk-pixbuf', default_options: [
+    # 'glycin=enable',
+    'documentation=false',
+    'introspection=disabled',
+    'relocatable=true',
+    'tests=false',
+])
+subproject('librsvg', default_options: [
+    'introspection=disabled',
+])
+subproject('gtk', default_options: [
+    'x11-backend=false',
+    'print-cups=disabled',
+    'introspection=disabled',
+    'media-gstreamer=disabled',
+    'build-testsuite=false',
+    'build-examples=false',
+    'build-tests=false',
+])
+subproject('libadwaita', default_options: [
+    'vapi=false',
+    'introspection=disabled',
+    'tests=false',
+    'examples=true',
+])
+subproject('libxml2')
+subproject('gtksourceview', default_options: [
+    'build-testsuite=false',
+    'vapi=false',
+])
