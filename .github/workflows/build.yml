@@ -1,0 +1,41 @@
+name: Build
+
+permissions:
+  contents: read
+
+on:
+  push:
+
+jobs:
+
+  macos:
+    strategy:
+      matrix:
+        target:
+          # - runner: macos-15-intel
+          #   arch: intel
+          - runner: macos-15
+            arch: arm
+    runs-on: ${{ matrix.target.runner }}
+    permissions:
+      contents: write
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+      - name: Set up workspace
+        run: |
+          python -m venv .venv
+          .venv/bin/pip install meson ninja gi-docgen docutils
+      - name: meson setup
+        run: |
+          source .venv/bin/activate
+          meson setup --prefix=/opt/gtk _build
+      - name: meson compile
+        run: |
+          source .venv/bin/activate
+          meson compile -C _build
+      - name: Package and upload compiled resources
+        run: echo TODO
