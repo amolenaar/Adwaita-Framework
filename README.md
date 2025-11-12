@@ -27,6 +27,7 @@ meson compile -C _build
 
 ## Wish list
 
+- [ ] Introspection
 - [ ] Add glycin image loader (depends on GTK?)
 - [ ] Enable Vulkan GDK backend
 
