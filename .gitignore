@@ -6,6 +6,10 @@ subprojects/*
 !subprojects/pango.wrap
 !subprojects/cairo.wrap
 !subprojects/libfyaml.wrap
+!subprojects/libtiff.wrap
+!subprojects/liblzma.wrap
+!subprojects/zstd.wrap
+!subprojects/lzo2.wrap
 !subprojects/appstream.wrap
 !subprojects/gtk.wrap
 !subprojects/libxml2.wrap

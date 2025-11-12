@@ -34,3 +34,10 @@ meson compile -C _build
 ## License
 
 This stuff is licensed under the GNU General Public License v3 or later.
+
+
+homebrew libappstream.5.dylib
+	/opt/homebrew/opt/zstd/lib/libzstd.1.dylib (compatibility version 1.0.0, current version 1.5.7)
+homebrew libgtk-4.1.dylib
+	/opt/homebrew/opt/libtiff/lib/libtiff.6.dylib (compatibility version 9.0.0, current version 9.0.0)
+	/opt/homebrew/opt/cairo/lib/libcairo-script-interpreter.2.dylib (compatibility version 2.0.0, current version 2.0.0)
