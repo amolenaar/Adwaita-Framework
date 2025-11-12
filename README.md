@@ -15,7 +15,7 @@ Some prep:
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-pip install meson ninja gi-docgen docutils itstool
+pip install meson ninja gi-docgen docutils
 ```
 
 Then, all can be built:
@@ -25,5 +25,11 @@ meson setup --prefix=/opt/gtk _build
 meson compile -C _build
 ```
 
+## Wish list
+
 - [ ] Add glycin image loader (depends on GTK?)
 - [ ] Enable Vulkan GDK backend
+
+## License
+
+This stuff is licensed under the GNU General Public License v3 or later.
