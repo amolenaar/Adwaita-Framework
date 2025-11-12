@@ -26,10 +26,13 @@ jobs:
       - name: meson setup
         run: |
           source .venv/bin/activate
-          meson setup --prefix=/opt/gtk _build
+          meson setup --prefix=$(pwd)/Adwaita-Framework _build
       - name: meson compile
         run: |
           source .venv/bin/activate
-          meson compile -C _build
-      - name: Package and upload compiled resources
-        run: echo TODO
+          meson install -C _build
+      - name: Upload Adwaita-Framework
+        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        with:
+          name: Adwaita-Framework
+          path: Adwaita-Framework/
