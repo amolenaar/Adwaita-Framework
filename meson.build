@@ -63,6 +63,7 @@ subproject('librsvg', default_options: [
     'rsvg-view-3=disabled',
 ])
 subproject('gtk', default_options: [
+    'vulkan=disabled',
     'x11-backend=false',
     'print-cups=disabled',
     'introspection=disabled',
