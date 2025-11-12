@@ -3,7 +3,7 @@ project(
   version: '1.0',
   default_options: [
     # 'wrap_mode=forcefallback',
-    'force-fallback-for=gtk,libadwaita,gtksourceview',
+    'force_fallback_for=gtk,libadwaita,gtksourceview',
     # pixman
     'pixman:demos=disabled',
     'pixman:gtk=disabled',
@@ -26,6 +26,7 @@ project(
 # fribidi -> fix version
 
 subproject('libfyaml')
+subproject('libxml2')
 subproject('glib', default_options: [
     'introspection=disabled',
     'sysprof=disabled',
@@ -56,7 +57,9 @@ subproject('gdk-pixbuf', default_options: [
     'tests=false',
 ])
 subproject('librsvg', default_options: [
-    'introspection=disabled',
+    # 'introspection=disabled',
+    'rsvg-convert=disabled',
+    'rsvg-view-3=disabled',
 ])
 subproject('gtk', default_options: [
     'x11-backend=false',
@@ -73,7 +76,6 @@ subproject('libadwaita', default_options: [
     'tests=false',
     'examples=true',
 ])
-subproject('libxml2')
 subproject('gtksourceview', default_options: [
     'build-testsuite=false',
     'vapi=false',
