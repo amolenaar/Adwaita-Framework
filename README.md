@@ -21,7 +21,9 @@ pip install meson ninja gi-docgen docutils itstool
 Then, all can be built:
 
 ```sh
-meson setup _build
+meson setup --prefix=/opt/gtk _build
 meson compile -C _build
 ```
 
+- [ ] Add glycin image loader (depends on GTK?)
+- [ ] Enable Vulkan GDK backend
