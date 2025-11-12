@@ -7,7 +7,7 @@ with the most important GNOME components.
 We need some tools from Homebrew:
 
 ```sh
-brew install itstool rustup cargo-c
+brew install rustup cargo-c
 ```
 
 Some prep:
@@ -15,7 +15,7 @@ Some prep:
 ```sh
 python -m venv .venv
 . .venv/bin/activate
-pip install meson ninja gi-docgen docutils
+pip install meson ninja gi-docgen docutils itstool
 ```
 
 Then, all can be built:

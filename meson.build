@@ -45,7 +45,9 @@ project(
     # libadwaita
     'libadwaita:vapi=false',
     'libadwaita:introspection=disabled',
-    # gtksourceview: to do
+    # gtksourceview:
+    'gtksourceview:build-testsuite=false',
+    'gtksourceview:vapi=false',
     # appstream
     # NB. Homebrew has another patch
     'appstream:systemd=false',
@@ -75,3 +77,4 @@ subproject('gdk-pixbuf')
 subproject('librsvg')
 subproject('gtk')
 subproject('libadwaita')
+subproject('gtksourceview')

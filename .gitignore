@@ -8,4 +8,5 @@ subprojects/*
 !subprojects/libfyaml.wrap
 !subprojects/appstream.wrap
 !subprojects/gtk.wrap
+!subprojects/gtksourceview.wrap
 !subprojects/packagefiles/
