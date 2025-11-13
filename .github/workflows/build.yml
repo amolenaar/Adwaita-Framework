@@ -34,6 +34,7 @@ jobs:
         run: |
           source .venv/bin/activate
           meson install -C _build
+          bin/fix-shared-libraries "$(pwd)/Adwaita-Framework"
       - name: Upload Adwaita-Framework
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:

@@ -1,0 +1,64 @@
+#!/bin/sh
+#
+# This script fixes the library references of this project and makes
+#
+
+ROOT="$1"
+
+function log() {
+  echo $* >&2
+}
+
+function resolve_deps() {
+  local lib=$1
+  local dep
+  otool -L $lib | grep -e "^.$ROOT/" |\
+  while read dep _; do
+    echo $dep
+  done
+}
+
+function fix_executable_paths() {
+  local lib=$1
+  log Fixing $lib
+  for dep in `resolve_deps $lib`; do
+    local new_dep="@executable_path/..${dep/#$ROOT/}"
+    log "|  $dep -> $new_dep"
+    install_name_tool -change $dep $new_dep $lib
+  done
+}
+
+function fix_loader_paths() {
+  local lib=$1
+  local locallibdir=$ROOT/lib
+  log Fixing $lib
+  for dep in `resolve_deps $lib`; do
+    local new_dep="@loader_path${dep/#$locallibdir/}"
+    log "|  $dep -> $new_dep"
+    install_name_tool -change $dep $new_dep $lib
+  done
+}
+
+
+xattr -dr com.apple.quarantine "$ROOT"
+chmod +x "$ROOT"/bin/*
+
+find $ROOT/bin -type f | \
+while read f; do
+  fix_executable_paths $f
+done
+
+find $ROOT/lib -name '*.dylib' | \
+while read f; do
+  fix_loader_paths $f
+done
+
+# Fix gdk-pixbuf plugins
+find $ROOT/lib -name '*.so' | \
+while read f; do
+  fix_loader_paths $f
+done
+
+# And some ugly fixes. Why it is using rpath all of a sudden?
+install_name_tool -change @rpath/libpng16.16.dylib @loader_path/libpng16.16.dylib $ROOT/lib/libgdk_pixbuf-2.0.0.dylib
+install_name_tool -change @rpath/libjpeg.8.2.2.dylib @loader_path/libjpeg.8.2.2.dylib $ROOT/lib/libgdk_pixbuf-2.0.0.dylib

@@ -19,6 +19,8 @@ project(
     'appstream:svg-support=false',
     'appstream:gir=false',
     'appstream:man=false',
+    # libxmlb
+    'libxmlb:tests=false',
   ]
 )
 
