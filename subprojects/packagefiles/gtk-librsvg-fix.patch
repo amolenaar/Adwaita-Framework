@@ -1,0 +1,14 @@
+diff --git a/meson.build b/meson.build
+index b32c921..1114303 100644
+--- a/meson.build
++++ b/meson.build
+@@ -14,9 +14,6 @@ project('gtk', 'c',
+           # also was a subproject.
+           # We'll just not pass them along in that case.
+           # TODO: move this back once we require meson >= 1.8
+-          'librsvg:default_library=static',
+-          'librsvg:rsvg-convert=disabled',
+-          'librsvg:rsvg-view-3=disabled',
+         ] : []),
+         meson_version : '>= 1.5.0',
+         license: 'LGPL-2.1-or-later')

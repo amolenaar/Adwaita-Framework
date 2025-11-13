@@ -22,7 +22,7 @@ jobs:
         run: brew list
       - name: Set up workspace
         run: |
-          brew install itstool
+          brew install itstool cargo-c
           brew unlink glib cairo xz lz4
           python -m venv .venv
           .venv/bin/pip install meson ninja gi-docgen docutils
