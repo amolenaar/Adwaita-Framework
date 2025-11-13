@@ -1,0 +1,15 @@
+diff --git a/subprojects/fontconfig.wrap b/subprojects/fontconfig.wrap
+deleted file mode 100644
+index aad79834..00000000
+--- a/subprojects/fontconfig.wrap
++++ /dev/null
+@@ -1,9 +0,0 @@
+-[wrap-git]
+-directory = fontconfig
+-url = https://gitlab.freedesktop.org/fontconfig/fontconfig
+-push-url = git@gitlab.freedesktop.org:fontconfig/fontconfig.git
+-depth = 1
+-revision = 2.15.0
+-
+-[provide]
+-fontconfig = fontconfig_dep
