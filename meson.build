@@ -26,7 +26,6 @@ project(
 # graphene version?
 # fribidi -> fix version
 
-subproject('lzo2')
 subproject('libfyaml')
 subproject('libxml2')
 subproject('glib', default_options: [
