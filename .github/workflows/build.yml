@@ -18,6 +18,8 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
+      - name: Installed homebrew packages
+        run: brew list
       - name: Set up workspace
         run: |
           brew install itstool
