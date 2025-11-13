@@ -23,7 +23,7 @@ jobs:
       - name: Set up workspace
         run: |
           brew install itstool
-          brew unlink cairo
+          brew unlink cairo xz
           python -m venv .venv
           .venv/bin/pip install meson ninja gi-docgen docutils
       - name: meson setup
