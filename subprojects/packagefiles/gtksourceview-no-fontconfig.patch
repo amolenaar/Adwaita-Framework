@@ -1,0 +1,13 @@
+diff --git a/meson.build b/meson.build
+index 31ec4c9..9068725 100644
+--- a/meson.build
++++ b/meson.build
+@@ -88,7 +88,7 @@ libxml_dep = dependency(['libxml-2.0', 'LibXml2'],
+                         version: libxml_req,
+                         fallback : ['libxml2', 'xml2lib_dep'])
+ fribidi_dep = dependency('fribidi', version: fribidi_req)
+-fontconfig_dep = dependency('fontconfig', required: false)
++fontconfig_dep = disabler()  # dependency('fontconfig', required: false)
+ pangoft2_dep = dependency('pangoft2', required: false)
+ pcre2_dep = dependency('libpcre2-8', version: pcre2_req,
+                        fallback : ['pcre2', 'libpcre2_8'])

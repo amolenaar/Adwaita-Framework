@@ -5,7 +5,6 @@ push-url = ssh://git@ssh.gitlab.gnome.org:GNOME/pango.git
 # needs to be main, because we build the nightly docs from the subproject
 revision = 1.56.4
 depth = 1
-diff_files = pango-remove-fontconfig.patch
 
 [provide]
 pango = libpango_dep
