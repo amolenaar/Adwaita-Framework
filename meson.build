@@ -3,6 +3,7 @@ project(
   'libadwaita-framework',
   version: '1.0',
   default_options: [
+    'buildtype=release',
     'wrap_mode=forcefallback',
     # 'force_fallback_for=cairo,gtk,libadwaita,gtksourceview',
     # pixman
@@ -30,10 +31,14 @@ project(
 
 subproject('libfyaml')
 subproject('libxml2')
+subproject('gobject-introspection', default_options: [
+  'cairo=disabled',
+  'tests=false',
+])
 subproject('glib', default_options: [
-    'introspection=disabled',
+    'introspection=enabled',
     'sysprof=disabled',
-    'tests=false'
+    'tests=false',
 ])
 subproject('cairo', default_options: [
     'fontconfig=disabled',
@@ -45,7 +50,7 @@ subproject('cairo', default_options: [
     'glib=enabled',
 ])
 subproject('pango', default_options: [
-    'introspection=disabled',
+    'introspection=enabled',
     'fontconfig=disabled',
     'cairo=enabled',
     'freetype=disabled',
@@ -55,12 +60,12 @@ subproject('pango', default_options: [
 subproject('gdk-pixbuf', default_options: [
     # 'glycin=enable',
     'documentation=false',
-    'introspection=disabled',
+    'introspection=enabled',
     'relocatable=true',
     'tests=false',
 ])
 subproject('librsvg', default_options: [
-    'introspection=disabled',
+    'introspection=enabled',
     'rsvg-convert=disabled',
     'pixbuf=enabled',
     # 'pixbuf-loader=enabled', # Requires gdk-pixbuf.pc
@@ -70,7 +75,7 @@ subproject('gtk', default_options: [
     'vulkan=disabled',
     'x11-backend=false',
     'print-cups=disabled',
-    'introspection=disabled',
+    'introspection=enabled',
     'media-gstreamer=disabled',
     'build-testsuite=false',
     'build-examples=false',
@@ -78,7 +83,7 @@ subproject('gtk', default_options: [
 ])
 subproject('libadwaita', default_options: [
     'vapi=false',
-    'introspection=disabled',
+    'introspection=enabled',
     'tests=false',
     'examples=true',
 ])

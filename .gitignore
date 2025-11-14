@@ -1,4 +1,5 @@
 subprojects/*
+!subprojects/gobject-introspection.wrap
 !subprojects/gdk-pixbuf.wrap
 !subprojects/glib.wrap
 !subprojects/libadwaita.wrap
