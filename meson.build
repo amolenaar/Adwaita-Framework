@@ -4,7 +4,6 @@ project(
   version: '1.0',
   default_options: [
     'buildtype=release',
-    'tests=false',
   ]
 )
 
@@ -12,35 +11,42 @@ project(
 # graphene version?
 # fribidi -> fix version
 
-subproject('zstd')
-subproject('zlib')
-subproject('libfyaml')
-subproject('libxml2')
-subproject('libtiff')
+# The base: GLib
 subproject('libffi')
-subproject('libpng')
-subproject('libjpeg-turbo')
-subproject('expat')
-subproject('fribidi')
-subproject('graphene')
-subproject('harfbuzz')
-subproject('icu')
-subproject('libepoxy')
-subproject('libepoxy')
-subproject('libxmlb', default_options: [ # for appstream
-  'tests=false'
-])
 subproject('pcre2')
 subproject('proxy-libintl')
-
-subproject('pixman', default_options: [
-  'demos=disabled',
-  'gtk=disabled',
-])
+subproject('zlib')
 subproject('glib', default_options: [
     'introspection=enabled',
     'sysprof=disabled',
     'tests=false',
+])
+
+
+subproject('zstd')
+subproject('libfyaml')
+subproject('libxml2')
+subproject('libjpeg-turbo')
+subproject('libtiff')
+subproject('libpng')
+subproject('expat')
+subproject('fribidi', default_options: [
+  'docs=false',
+  'tests=false',
+])
+subproject('icu')
+subproject('libepoxy')
+
+subproject('libxmlb', default_options: [ # for appstream
+  'gtkdoc=false',
+  'tests=false',
+])
+subproject('graphene', default_options: [
+  'tests=false'
+])
+subproject('pixman', default_options: [
+  'demos=disabled',
+  'gtk=disabled',
 ])
 subproject('cairo', default_options: [
     'fontconfig=disabled',
@@ -50,6 +56,12 @@ subproject('cairo', default_options: [
     'quartz=enabled',
     'tests=disabled',
     'glib=enabled',
+])
+subproject('harfbuzz', default_options: [
+  'tests=disabled',
+  'coretext=enabled',
+  'freetype=disabled',
+  'cairo=enabled',
 ])
 subproject('pango', default_options: [
     'introspection=enabled',
