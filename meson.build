@@ -1,27 +1,10 @@
 # SPDX-License-Identifier: GPL-3.0-or-later
 project(
-  'libadwaita-framework',
+  'adwaita-framework',
   version: '1.0',
   default_options: [
     'buildtype=release',
-    'wrap_mode=forcefallback',
-    # 'force_fallback_for=cairo,gtk,libadwaita,gtksourceview',
-    # pixman
-    'pixman:demos=disabled',
-    'pixman:gtk=disabled',
-    # glycin
-    # todo: build glycin first
-    # appstream
-    # NB. Homebrew has another patch
-    'appstream:systemd=false',
-    'appstream:apidocs=false',
-    'appstream:install-docs=false',
-    'appstream:stemming=false',
-    'appstream:svg-support=false',
-    'appstream:gir=false',
-    'appstream:man=false',
-    # libxmlb
-    'libxmlb:tests=false',
+    'tests=false',
   ]
 )
 
@@ -29,11 +12,30 @@ project(
 # graphene version?
 # fribidi -> fix version
 
+subproject('zstd')
+subproject('zlib')
 subproject('libfyaml')
 subproject('libxml2')
-subproject('gobject-introspection', default_options: [
-  'cairo=disabled',
-  'tests=false',
+subproject('libtiff')
+subproject('libffi')
+subproject('libpng')
+subproject('libjpeg-turbo')
+subproject('expat')
+subproject('fribidi')
+subproject('graphene')
+subproject('harfbuzz')
+subproject('icu')
+subproject('libepoxy')
+subproject('libepoxy')
+subproject('libxmlb', default_options: [ # for appstream
+  'tests=false'
+])
+subproject('pcre2')
+subproject('proxy-libintl')
+
+subproject('pixman', default_options: [
+  'demos=disabled',
+  'gtk=disabled',
 ])
 subproject('glib', default_options: [
     'introspection=enabled',
@@ -71,6 +73,10 @@ subproject('librsvg', default_options: [
     # 'pixbuf-loader=enabled', # Requires gdk-pixbuf.pc
     'tests=false',
 ])
+
+# GTK and friends
+
+subproject('accesskit-c')
 subproject('gtk', default_options: [
     'vulkan=disabled',
     'x11-backend=false',
@@ -81,13 +87,23 @@ subproject('gtk', default_options: [
     'build-examples=false',
     'build-tests=false',
 ])
+subproject('appstream', default_options: [
+    'systemd=false',
+    'apidocs=false',
+    'install-docs=false',
+    'stemming=false',
+    'svg-support=false',
+    'gir=false',
+    'man=false',
+])
 subproject('libadwaita', default_options: [
-    'vapi=false',
     'introspection=enabled',
+    'vapi=false',
     'tests=false',
     'examples=true',
 ])
 subproject('gtksourceview', default_options: [
+    'introspection=enabled',
     'build-testsuite=false',
     'vapi=false',
 ])
