@@ -31,10 +31,15 @@ jobs:
           source .venv/bin/activate
           meson setup --prefix=$(pwd)/_install _build
           meson install -C _build
-      - name: Phase two - build libadwaita
+      - name: Phase two - build cairo, pango
         run: |
           source .venv/bin/activate
           meson setup --prefix=$(pwd)/_install --reconfigure -Dphase=two _build
+          meson install -C _build
+      - name: Phase two - build libadwaita
+        run: |
+          source .venv/bin/activate
+          meson setup --prefix=$(pwd)/_install --reconfigure -Dphase=three _build
           meson install -C _build
       - name: Phase three - rebuild librsvg
         run: |

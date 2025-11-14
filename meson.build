@@ -11,6 +11,8 @@ project(
 # graphene version?
 # fribidi -> fix version
 
+phase = get_option('phase')
+
 # The base: GLib
 subproject('libffi')
 subproject('pcre2')
@@ -22,7 +24,7 @@ subproject('glib', default_options: [
     'tests=false',
 ])
 
-if get_option('phase') == 'two'
+if phase == 'two' or phase == 'three'
   subproject('zstd')
   subproject('liblzma')
   subproject('libwebp')
@@ -95,10 +97,13 @@ if get_option('phase') == 'two'
       'docs=disabled',
       'tests=false',
   ])
+  subproject('accesskit-c')
 
+endif
+
+if phase == 'three'
   # GTK and friends
 
-  subproject('accesskit-c')
   subproject('gtk', default_options: [
       'vulkan=disabled',
       'x11-backend=false',
