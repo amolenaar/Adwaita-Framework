@@ -1,0 +1,7 @@
+#!/bin/sh
+#
+# Fix file modes and permissions
+#
+
+xattr -dr com.apple.quarantine "$ROOT"
+chmod +x "$ROOT"/bin/*

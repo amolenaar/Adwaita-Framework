@@ -1,0 +1,4 @@
+option('phase',
+       type: 'combo',
+       choices: [ 'one', 'two', 'three' ],
+       description : 'Build phase')

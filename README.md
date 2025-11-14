@@ -34,39 +34,3 @@ meson compile -C _build
 ## License
 
 This stuff is licensed under the GNU General Public License v3 or later.
-
-
-
-accesskit-c
-appstream
-cairo
-freetype2
-fribidi
-gdk-pixbuf
-gi-docgen
-glib
-gperf
-graphene
-gtk
-gtksourceview
-gvdb
-harfbuzz
-icu
-libadwaita
-libepoxy
-libffi
-libfyaml
-libjpeg-turbo
-libpng
-librsvg
-libsass
-libtiff
-libxml2
-libxmlb
-pango
-pcre2
-pixman
-proxy-libintl
-sassc
-zlib
-zst

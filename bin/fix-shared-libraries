@@ -39,26 +39,39 @@ function fix_loader_paths() {
   done
 }
 
-
-xattr -dr com.apple.quarantine "$ROOT"
-chmod +x "$ROOT"/bin/*
+function fix_pixbuf_loader_paths() {
+  local lib=$1
+  local locallibdir=$ROOT/lib
+  log Fixing $lib
+  for dep in `resolve_deps $lib`; do
+    local new_dep="@loader_path/../../..${dep/#$locallibdir/}"
+    log "|  $dep -> $new_dep"
+    install_name_tool -change $dep $new_dep $lib
+  done
+}
 
 find $ROOT/bin -type f | \
 while read f; do
   fix_executable_paths $f
 done
 
-find $ROOT/lib -name '*.dylib' | \
+find $ROOT/lib -depth 1 -name '*.dylib' | \
 while read f; do
   fix_loader_paths $f
 done
 
 # Fix gdk-pixbuf plugins
-find $ROOT/lib -name '*.so' | \
+find $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders -name '*.so' | \
 while read f; do
-  fix_loader_paths $f
+  fix_pixbuf_loader_paths $f
 done
 
 # And some ugly fixes. Why it is using rpath all of a sudden?
 install_name_tool -change @rpath/libpng16.16.dylib @loader_path/libpng16.16.dylib $ROOT/lib/libgdk_pixbuf-2.0.0.dylib
 install_name_tool -change @rpath/libjpeg.8.2.2.dylib @loader_path/libjpeg.8.2.2.dylib $ROOT/lib/libgdk_pixbuf-2.0.0.dylib
+install_name_tool -change @rpath/libpng16.16.dylib @loader_path/../../../libpng16.16.dylib $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-gif.so
+install_name_tool -change @rpath/libjpeg.8.2.2.dylib @loader_path/../../../libjpeg.8.2.2.dylib $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader-tiff.so
+install_name_tool -change @rpath/librsvg-2.2.dylib @loader_path/../../../librsvg-2.2.dylib $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader_svg.dylib
+
+ln $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader_svg.dylib $ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders/libpixbufloader_svg.so
+GDK_PIXBUF_MODULEDIR=$ROOT/lib/gdk-pixbuf-2.0/2.10.0/loaders $ROOT/bin/gdk-pixbuf-query-loaders --update-cache

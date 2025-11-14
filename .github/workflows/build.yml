@@ -18,25 +18,33 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
-      - name: Installed homebrew packages
-        run: brew list
       - name: Set up workspace
         run: |
           brew install itstool cargo-c gobject-introspection
-          brew unlink glib cairo xz lz4
+          brew unlink cairo xz lz4
           python -m venv .venv
           .venv/bin/pip install meson ninja gi-docgen docutils
-      - name: meson setup
+      - name: Installed homebrew packages
+        run: brew list
+      - name: Phase one - build GLib
         run: |
           source .venv/bin/activate
-          meson setup --prefix=$(pwd)/Adwaita-Framework _build
-      - name: meson compile
-        run: |
-          source .venv/bin/activate
+          meson setup --prefix=$(pwd)/_install _build
           meson install -C _build
-          bin/fix-shared-libraries "$(pwd)/Adwaita-Framework"
+      - name: Phase two - build libadwaita
+        run: |
+          source .venv/bin/activate
+          meson setup --prefix=$(pwd)/_install --reconfigure -Dphase=two _build
+          meson install -C _build
+      - name: Phase three - rebuild librsvg
+        run: |
+          ./librsvg-pixbuf-loader.sh $(pwd)/_install
+      - name: Phase four - make libraries relocatable
+        run: |
+          bin/fix-shared-libraries "$(pwd)/_install"
+          cp bin/post-install "$(pwd)/_install"
       - name: Upload Adwaita-Framework
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:
           name: Adwaita-Framework
-          path: Adwaita-Framework/
+          path: _install/
