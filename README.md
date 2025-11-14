@@ -27,8 +27,10 @@ meson compile -C _build
 
 ## Wish list
 
-homebrew libtiff.6.dylib
-	/opt/homebrew/opt/xz/lib/liblzma.5.dylib (compatibility version 14.0.0, current version 14.1.0)
-homebrew libtiff.dylib
-	/opt/homebrew/opt/xz/lib/liblzma.5.dylib (compatibility version 14.0.0,
+- [ ] Introspection
+- [x] ~~Add glycin image loader~~ Requires linux specific APIs
+- [ ] Enable Vulkan GDK backend
 
+## License
+
+This stuff is licensed under the GNU General Public License v3 or later.

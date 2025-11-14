@@ -62,7 +62,6 @@ subproject('gdk-pixbuf', default_options: [
 subproject('librsvg', default_options: [
     'introspection=disabled',
     'rsvg-convert=disabled',
-    # 'rsvg-view-3=disabled',
     'pixbuf=enabled',
     # 'pixbuf-loader=enabled', # Requires gdk-pixbuf.pc
     'tests=false',
