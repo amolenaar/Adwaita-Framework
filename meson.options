@@ -1,4 +1,2 @@
-option('phase',
-       type: 'combo',
-       choices: [ 'one', 'two', 'three' ],
-       description : 'Build phase')
+option('introspection', type: 'feature', value: 'disabled',
+  description: 'Generate gobject-introspection bindings (.gir/.typelib files)')
