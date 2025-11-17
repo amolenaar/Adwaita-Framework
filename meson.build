@@ -96,7 +96,7 @@ subproject('librsvg', default_options: [
     'docs=disabled',
     'tests=false',
 ])
-subproject('accesskit-c')
+# subproject('accesskit-c')
 
 # GTK and friends
 
