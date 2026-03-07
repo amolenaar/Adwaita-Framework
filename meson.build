@@ -8,6 +8,7 @@ project(
   ]
 )
 
+# Introspection requires some form of gobject-introspection to be installed
 introspection = get_option('introspection').enabled() ? 'enabled' : 'disabled'
 
 # The base: GLib
@@ -85,15 +86,6 @@ subproject('gdk-pixbuf', default_options: [
     'documentation=false',
     'introspection=' + introspection,
     'relocatable=true',
-    'tests=false',
-])
-subproject('librsvg', default_options: [
-    'introspection=' + introspection,
-    'rsvg-convert=disabled',
-    'pixbuf=enabled',
-    'avif=disabled',
-    # 'pixbuf-loader=enabled', # Requires gdk-pixbuf.pc
-    'docs=disabled',
     'tests=false',
 ])
 # subproject('accesskit-c')

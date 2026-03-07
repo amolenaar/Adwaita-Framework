@@ -18,6 +18,12 @@ python -m venv .venv
 pip install meson ninja gi-docgen docutils
 ```
 
+Install gobject-introspection if you want introspection libraries to be built:
+
+```sh
+brew install gobject-introspection
+```
+
 Then, all can be built:
 
 ```sh
@@ -25,9 +31,11 @@ meson setup --prefix=/opt/gtk _build
 meson compile -C _build
 ```
 
+For introspection, add the option `-Dintrospection=enabled` to the `meson setup` command.
+
 ## Wish list
 
-- [ ] Introspection
+- [x] Introspection
 - [x] ~~Add glycin image loader~~ Requires linux specific APIs
 - [ ] Enable Vulkan GDK backend
 
