@@ -7,21 +7,7 @@ with the most important GNOME components.
 We need some tools from Homebrew:
 
 ```sh
-brew install rustup cargo-c
-```
-
-Some prep:
-
-```sh
-python -m venv .venv
-. .venv/bin/activate
-pip install meson ninja gi-docgen docutils
-```
-
-Install gobject-introspection if you want introspection libraries to be built:
-
-```sh
-brew install gobject-introspection
+brew install itstool gobject-introspection
 ```
 
 Then, all can be built:
