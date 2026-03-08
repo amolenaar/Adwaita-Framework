@@ -23,12 +23,13 @@ subproject('glib', default_options: [
 ])
 
 subproject('zstd')
-subproject('liblzma')
 subproject('libwebp')
 subproject('libfyaml')
 subproject('libxml2')
 subproject('libjpeg-turbo')
-subproject('libtiff')
+subproject('libtiff', default_options: [
+  'lzma=disabled',
+])
 subproject('libpng')
 subproject('expat')
 subproject('fribidi', default_options: [
@@ -40,6 +41,7 @@ subproject('libepoxy')
 
 subproject('libxmlb', default_options: [ # for appstream
   'introspection=' + (introspection == 'disabled' ? 'false' : 'true'),
+  'lzma=disabled',
   'gtkdoc=false',
   'tests=false',
 ])
@@ -87,6 +89,10 @@ subproject('gdk-pixbuf', default_options: [
     'introspection=' + introspection,
     'relocatable=true',
     'tests=false',
+    'png=enabled',
+    'tiff=enabled',
+    'jpeg=enabled',
+    'gif=enabled',
 ])
 # subproject('accesskit-c')
 
