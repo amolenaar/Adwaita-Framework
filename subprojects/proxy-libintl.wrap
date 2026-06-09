@@ -2,7 +2,7 @@
 directory = proxy-libintl
 url = https://github.com/frida/proxy-libintl.git
 revision = 33934de09af6a6627eb44e310a8079df009abdbb
-depth=1
+depth = 1
 
 [provide]
 intl = intl_dep
