@@ -82,10 +82,12 @@ subproject('pango', default_options: [
     'freetype=disabled',
     'build-testsuite=false',
     'build-examples=false',
+    'libthai=disabled',
 ])
 subproject('gdk-pixbuf', default_options: [
     # 'glycin=enable',
     'documentation=false',
+    'man=false',
     'introspection=' + introspection,
     'relocatable=true',
     'tests=false',

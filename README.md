@@ -13,7 +13,7 @@ brew install itstool gobject-introspection
 Then, all can be built:
 
 ```sh
-meson setup --prefix=/opt/gtk _build
+meson setup --prefix=/opt/adwaita _build
 meson compile -C _build
 ```
 
@@ -22,7 +22,7 @@ For introspection, add the option `-Dintrospection=enabled` to the `meson setup`
 ## Wish list
 
 - [x] Introspection
-- [x] ~~Add glycin image loader~~ Requires linux specific APIs
+- [ ] Add glycin image loader
 - [ ] Enable Vulkan GDK backend
 
 ## License
