@@ -85,7 +85,7 @@ subproject('pango', default_options: [
     'libthai=disabled',
 ])
 subproject('gdk-pixbuf', default_options: [
-    'glycin=disable',
+    'glycin=disabled',
     'documentation=false',
     'man=false',
     'introspection=' + introspection,
