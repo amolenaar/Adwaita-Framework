@@ -20,10 +20,10 @@ jobs:
           persist-credentials: false
       - name: Set up workspace
         run: |
-          brew install itstool cargo-c gobject-introspection
+          brew install cargo-c gobject-introspection
           brew unlink glib cairo xz lz4
           python -m venv .venv
-          .venv/bin/pip install meson ninja gi-docgen docutils
+          .venv/bin/pip install meson ninja
       - name: Installed homebrew packages
         run: brew list
       - name: meson setup
@@ -34,10 +34,6 @@ jobs:
         run: |
           source .venv/bin/activate
           meson install -C _build
-      # - name: Rebuild librsvg
-      #   run: |
-      #     source .venv/bin/activate
-      #     ./librsvg-pixbuf-loader.sh $(pwd)/_install
       - name: Make libraries relocatable
         run: |
           bin/fix-shared-libraries "$(pwd)/_install"
