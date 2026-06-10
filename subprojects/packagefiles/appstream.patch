@@ -1,3 +1,20 @@
+diff --git a/meson.build b/meson.build
+index ccd9f0e..466c025 100644
+--- a/meson.build
++++ b/meson.build
+@@ -233,10 +233,10 @@ if get_option('compose')
+ endif
+ subdir('tools/')
+ subdir('po/')
+-subdir('data/')
++#subdir('data/')
+ subdir('contrib/')
+ subdir('docs/')
+-subdir('tests/')
++# subdir('tests/')
+ if get_option('qt')
+     subdir('qt/')
+ endif
 diff --git a/tests/meson.build b/tests/meson.build
 index 5b70409..e3443a5 100644
 --- a/tests/meson.build

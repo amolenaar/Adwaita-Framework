@@ -24,6 +24,7 @@ For introspection, add the option `-Dintrospection=enabled` to the `meson setup`
 - [x] Introspection
 - [ ] Add glycin image loader
 - [ ] Enable Vulkan GDK backend
+- [x] Enable Accesskit
 
 ## License
 

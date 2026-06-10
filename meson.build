@@ -96,7 +96,7 @@ subproject('gdk-pixbuf', default_options: [
     'jpeg=enabled',
     'gif=enabled',
 ])
-# subproject('accesskit-c')
+subproject('accesskit-c')
 
 # GTK and friends
 
@@ -106,6 +106,7 @@ subproject('gtk', default_options: [
     'print-cups=disabled',
     'introspection=' + introspection,
     'media-gstreamer=disabled',
+    'accesskit=enabled',
     'build-testsuite=false',
     'build-examples=false',
     'build-tests=false',
