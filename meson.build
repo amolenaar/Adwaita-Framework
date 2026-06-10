@@ -85,12 +85,13 @@ subproject('pango', default_options: [
     'libthai=disabled',
 ])
 subproject('gdk-pixbuf', default_options: [
-    # 'glycin=enable',
+    'glycin=disable',
     'documentation=false',
     'man=false',
     'introspection=' + introspection,
     'relocatable=true',
     'tests=false',
+    'builtin_loaders=all',
     'png=enabled',
     'tiff=enabled',
     'jpeg=enabled',
@@ -131,3 +132,5 @@ subproject('gtksourceview', default_options: [
     'build-testsuite=false',
     'vapi=false',
 ])
+
+meson.add_install_script(join_paths(meson.current_source_dir(), 'scripts', 'fix-gdk-pixbuf-rpath.sh'))
