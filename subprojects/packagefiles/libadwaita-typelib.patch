@@ -1,12 +1,12 @@
 diff --git a/src/meson.build b/src/meson.build
-index e1f1a0a..def1513 100644
+index 8a86f9e..7f4e5f7 100644
 --- a/src/meson.build
 +++ b/src/meson.build
-@@ -463,6 +463,7 @@ if introspection
+@@ -473,6 +473,7 @@ if introspection
           install_dir_gir: girdir,
       install_dir_typelib: typelibdir,
                extra_args: libadwaita_gir_extra_args,
-+            dependencies: [dependency('girepository-2.0')],
++            dependencies: [dependency('girepository-2.0'), dependency('gtk4')],
     )
  
     if get_option('vapi')

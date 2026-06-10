@@ -7,7 +7,7 @@ index 19655e1..27591f2 100644
          export_packages: [package_string],
                link_with: gtksource_lib,
 -           dependencies: gtksource_deps,
-+           dependencies: [gtksource_deps, dependency('girepository-2.0')],
++           dependencies: [gtksource_deps, dependency('girepository-2.0'), dependency('gtk4')],
                 includes: [ 'Gtk-4.0' ],
                  install: true,
          install_dir_gir: girdir,
