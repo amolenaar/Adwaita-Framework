@@ -1,2 +1,2 @@
-option('introspection', type: 'feature', value: 'disabled',
+option('introspection', type: 'feature', value: 'enabled',
   description: 'Generate gobject-introspection bindings (.gir/.typelib files)')
