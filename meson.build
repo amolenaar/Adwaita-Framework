@@ -118,7 +118,7 @@ subproject('appstream', default_options: [
     'install-docs=false',
     'stemming=false',
     'svg-support=false',
-    'gir=false',
+    'gir=false', # = introspection
     'man=false',
 ])
 subproject('libadwaita', default_options: [

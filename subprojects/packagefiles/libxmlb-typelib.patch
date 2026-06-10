@@ -1,0 +1,12 @@
+diff --git a/src/meson.build b/src/meson.build
+index 7797510..fec41e0 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -203,6 +203,7 @@ if get_option('introspection')
+     header : 'xmlb.h',
+     dependencies : [
+       gio,
++      dependency('girepository-2.0'),
+     ],
+     includes : [
+       'Gio-2.0',

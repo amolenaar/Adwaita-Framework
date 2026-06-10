@@ -1,0 +1,12 @@
+diff --git a/src/meson.build b/src/meson.build
+index d5d4b3c..b68d32e 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -116,6 +116,7 @@ if build_gir
+     identifier_prefix: 'Graphene',
+     symbol_prefix: 'graphene',
+     export_packages: graphene_gobject_api_path,
++    dependencies : [ dependency('girepository-2.0') ],
+     includes: [ 'GObject-2.0' ],
+     header: 'graphene-gobject.h',
+     install: true,

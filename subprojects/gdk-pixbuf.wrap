@@ -4,6 +4,7 @@ url = https://gitlab.gnome.org/GNOME/gdk-pixbuf.git
 push-url = ssh://git@ssh.gitlab.gnome.org:GNOME/gdk-pixbuf.git
 revision = 2.44.6
 depth = 1
+diff_files = gdk-pixbuf-typelib.patch
 
 [provide]
 dependency_names = gdk-pixbuf-2.0

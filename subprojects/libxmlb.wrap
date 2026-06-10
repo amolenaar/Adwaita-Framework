@@ -3,3 +3,4 @@ directory = libxmlb
 url = https://github.com/hughsie/libxmlb.git
 revision = 0.3.24
 depth = 1
+diff_files = libxmlb-typelib.patch

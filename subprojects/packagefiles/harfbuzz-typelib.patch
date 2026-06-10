@@ -1,0 +1,13 @@
+diff --git a/src/meson.build b/src/meson.build
+index 44c858c..cfe2443 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -1018,7 +1018,7 @@ if have_gobject
+     conf.set('HAVE_INTROSPECTION', 1)
+     hb_gen_files_gir = gnome.generate_gir([libharfbuzz_gobject, libharfbuzz],
+       sources: [gir_headers, gir_sources, gobject_enums_h],
+-      dependencies: libharfbuzz_dep,
++      dependencies: [libharfbuzz_dep, dependency('girepository-2.0')],
+       namespace: 'HarfBuzz',
+       nsversion: '0.0',
+       identifier_prefix: 'hb_',

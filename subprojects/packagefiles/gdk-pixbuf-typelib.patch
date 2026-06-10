@@ -1,0 +1,20 @@
+diff --git a/gdk-pixbuf/meson.build b/gdk-pixbuf/meson.build
+index 16d97e7..1819e64 100644
+--- a/gdk-pixbuf/meson.build
++++ b/gdk-pixbuf/meson.build
+@@ -311,6 +311,7 @@ if build_gir
+     header: 'gdk-pixbuf/gdk-pixbuf.h',
+     install: true,
+     extra_args: gir_args,
++    dependencies: [dependency('girepository-2.0')],
+   )
+ 
+   gdkpixdata_gir = gnome.generate_gir(
+@@ -325,6 +326,7 @@ if build_gir
+     header: 'gdk-pixbuf/gdk-pixdata.h',
+     install: true,
+     extra_args: gir_args,
++    dependencies: [dependency('girepository-2.0')],
+   )
+ 
+   built_girs = [ gdkpixbuf_gir, gdkpixdata_gir ]

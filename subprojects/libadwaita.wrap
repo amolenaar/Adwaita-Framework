@@ -3,3 +3,4 @@ directory=libadwaita
 url=https://gitlab.gnome.org/GNOME/libadwaita.git
 revision=1.9.1
 depth=1
+diff_files=libadwaita-typelib.patch

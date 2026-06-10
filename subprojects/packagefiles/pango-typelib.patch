@@ -1,0 +1,22 @@
+diff --git a/pango/meson.build b/pango/meson.build
+index f3c6d70..0efb499 100644
+--- a/pango/meson.build
++++ b/pango/meson.build
+@@ -150,7 +150,7 @@ if build_gir
+     identifier_prefix: 'Pango',
+     symbol_prefix: 'pango',
+     export_packages: 'pango',
+-    dependencies: pango_deps,
++    dependencies: pango_deps + [dependency('girepository-2.0')],
+     includes: [ 'HarfBuzz-0.0', 'GObject-2.0', 'Gio-2.0', 'cairo-1.0' ],
+     header: 'pango/pango.h',
+     install: true,
+@@ -545,7 +545,7 @@ if cairo_dep.found()
+     pangocairo_gir = gnome.generate_gir(
+       libpangocairo,
+       sources: pangocairo_headers + pangocairo_sources,
+-      dependencies: [ pangocairo_deps, pango_gir_dep ],
++      dependencies: [ pangocairo_deps, pango_gir_dep, dependency('girepository-2.0') ],
+       namespace: 'PangoCairo',
+       nsversion: pango_api_version,
+       identifier_prefix: 'PangoCairo',

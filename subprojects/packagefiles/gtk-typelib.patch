@@ -1,0 +1,40 @@
+diff --git a/gtk/meson.build b/gtk/meson.build
+index 73853de..4fe5c5e 100644
+--- a/gtk/meson.build
++++ b/gtk/meson.build
+@@ -1098,7 +1098,7 @@ if build_gir
+     includes: gdk_gir_inc,
+     header: 'gdk/gdk.h',
+     install: true,
+-    dependencies: libgdk_dep,
++    dependencies: [libgdk_dep, dependency('girepository-2.0')],
+     extra_args: gir_args,
+     fatal_warnings: false,
+   )
+@@ -1169,7 +1169,7 @@ if build_gir
+       export_packages: 'gtk4-macos',
+       includes: [ gdk_gir[0], ],
+       install: true,
+-      dependencies: libgdk_dep,
++      dependencies: [libgdk_dep, dependency('girepository-2.0')],
+       header: 'gdk/macos/gdkmacos.h',
+       extra_args: gir_args,
+       fatal_warnings: get_option('werror'),
+@@ -1207,7 +1207,7 @@ if build_gir
+     includes: gsk_gir_inc,
+     header: 'gsk/gsk.h',
+     install: true,
+-    dependencies: libgsk_dep,
++    dependencies: [libgsk_dep, dependency('girepository-2.0')],
+     extra_args: gir_args,
+     fatal_warnings: false,
+   )
+@@ -1244,7 +1244,7 @@ if build_gir
+     includes: [ gdk_gir[0], gsk_gir[0], ],
+     header: 'gtk/gtk.h',
+     install: true,
+-    dependencies: [gtk_deps, libgsk_dep],
++    dependencies: [gtk_deps, libgsk_dep, dependency('girepository-2.0')],
+     extra_args: gir_args,
+     fatal_warnings: false,
+   )

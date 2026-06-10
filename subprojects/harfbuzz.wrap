@@ -4,6 +4,7 @@ url = https://github.com/harfbuzz/harfbuzz.git
 push-url = git@github.com:harfbuzz/harfbuzz.git
 revision =  12.2.0
 depth = 1
+diff_files = harfbuzz-typelib.patch
 
 [provide]
 harfbuzz = libharfbuzz_dep

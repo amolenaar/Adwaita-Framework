@@ -1,0 +1,13 @@
+diff --git a/gtksourceview/meson.build b/gtksourceview/meson.build
+index 19655e1..27591f2 100644
+--- a/gtksourceview/meson.build
++++ b/gtksourceview/meson.build
+@@ -307,7 +307,7 @@ if generate_gir
+       identifier_prefix: 'GtkSource',
+         export_packages: [package_string],
+               link_with: gtksource_lib,
+-           dependencies: gtksource_deps,
++           dependencies: [gtksource_deps, dependency('girepository-2.0')],
+                includes: [ 'Gtk-4.0' ],
+                 install: true,
+         install_dir_gir: girdir,
