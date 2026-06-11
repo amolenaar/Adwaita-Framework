@@ -3,5 +3,7 @@
 # Fix file modes and permissions
 #
 
+ROOT="$(dirname $0)"
+
 xattr -dr com.apple.quarantine "$ROOT"
 chmod +x "$ROOT"/bin/*

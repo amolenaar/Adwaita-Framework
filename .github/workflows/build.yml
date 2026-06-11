@@ -36,8 +36,8 @@ jobs:
           meson install -C _build
       - name: Make libraries relocatable
         run: |
-          bin/fix-shared-libraries "$(pwd)/_install"
-          cp bin/post-install "$(pwd)/_install"
+          scripts/make-relocatable "$(pwd)/_install"
+          cp scripts/post-install "$(pwd)/_install"
       - name: Upload Adwaita-Framework
         uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
         with:

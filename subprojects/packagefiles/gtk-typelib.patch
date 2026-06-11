@@ -1,5 +1,5 @@
 diff --git a/gtk/meson.build b/gtk/meson.build
-index 73853de..6d59d7d 100644
+index 73853de..31a119e 100644
 --- a/gtk/meson.build
 +++ b/gtk/meson.build
 @@ -1098,7 +1098,7 @@ if build_gir
@@ -7,7 +7,7 @@ index 73853de..6d59d7d 100644
      header: 'gdk/gdk.h',
      install: true,
 -    dependencies: libgdk_dep,
-+    dependencies: [libgdk_dep, dependency('girepository-2.0'), dependency('pangocairo')],
++    dependencies: [libgdk_dep, dependency('girepository-2.0'), dependency('pangocairo'), dependency('gdk-pixbuf-2.0')],
      extra_args: gir_args,
      fatal_warnings: false,
    )
