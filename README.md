@@ -18,12 +18,16 @@ meson compile -C _build
 
 To disable introspection (typelib) to be build, add the option `-Dintrospection=disabled` to the `meson setup` command.
 
+You can take a build from CI (GitHub actions). This build is supposed to be installed as `/opt/adwaita`.
+
 ## Wish list
 
 - [x] Introspection
 - [ ] Add glycin image loader
 - [ ] Enable Vulkan GDK backend
 - [x] Enable Accesskit
+- [ ] Package with readme
+- [ ] Test with PyInstaller
 
 ## License
 
