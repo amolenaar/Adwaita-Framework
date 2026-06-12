@@ -14,7 +14,7 @@ jobs:
       contents: write
     timeout-minutes: 45
     steps:
-      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
@@ -39,7 +39,7 @@ jobs:
           cp scripts/make-relocatable "$(pwd)/_install/opt/adwaita"
           cp scripts/post-install "$(pwd)/_install/opt/adwaita"
       - name: Upload Adwaita-Framework
-        uses: actions/upload-artifact@65462800fd760344b1a7b4382951275a0abb4808 # v4.3.3
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: Adwaita-Framework
           path: _install/
