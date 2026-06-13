@@ -79,7 +79,7 @@ subproject('pango', default_options: [
     'introspection=' + introspection,
     'fontconfig=disabled',
     'cairo=enabled',
-    'freetype=disabled',
+    'freetype=enabled',
     'build-testsuite=false',
     'build-examples=false',
     'libthai=disabled',
