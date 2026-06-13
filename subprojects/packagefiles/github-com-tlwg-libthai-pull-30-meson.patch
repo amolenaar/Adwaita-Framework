@@ -1,0 +1,305 @@
+diff --git a/data/meson.build b/data/meson.build
+new file mode 100644
+index 0000000..574b9a0
+--- /dev/null
++++ b/data/meson.build
+@@ -0,0 +1,51 @@
++dict_dir = get_option('datadir') / 'libthai'
++
++if not get_option('dict')
++    subdir_done()
++endif
++
++sort = find_program('sort')
++cp = find_program('cp')
++trietool = find_program('trietool')
++
++dictionary = custom_target(
++    'tdict',
++    command: [sort, '-u', '-o', '@OUTPUT@', '@INPUT@'],
++    env: {'LC_ALL': 'C'},
++    input: [
++        'tdict-common.txt',
++        'tdict-collection.txt',
++        'tdict-currency.txt',
++        'tdict-district.txt',
++        'tdict-city.txt',
++        'tdict-country.txt',
++        'tdict-geo.txt',
++        'tdict-history.txt',
++        'tdict-ict.txt',
++        'tdict-lang-ethnic.txt',
++        'tdict-proper.txt',
++        'tdict-science.txt',
++        'tdict-slang.txt',
++        'tdict-spell.txt',
++        'tdict-std.txt',
++        'tdict-std-compound.txt',
++    ],
++    output: ['tdict.txt'],
++)
++# trietool look for thbrk.abm in the directory of thbrk.tri
++# so we need to copy thbrk.abm into the build directory
++alphamap = custom_target(
++    'alphabet_map',
++    command: [cp, '@INPUT@', '@OUTPUT@'],
++    input: ['thbrk.abm'],
++    output: ['thbrk.abm'],
++)
++tri = custom_target(
++    'tri',
++    command: [trietool, 'subprojects/libthai-0.1.30/data/thbrk', 'add-list', '-e', 'utf-8', '@INPUT0@'],
++    input: [dictionary],
++    depends: [alphamap],
++    output: ['thbrk.tri'],
++    install: true,
++    install_dir: dict_dir,
++)
+diff --git a/doc/meson.build b/doc/meson.build
+new file mode 100644
+index 0000000..2db43eb
+--- /dev/null
++++ b/doc/meson.build
+@@ -0,0 +1,34 @@
++if get_option('docs').disabled()
++    subdir_done()
++endif
++
++doxygen = find_program(
++    'doxygen',
++    required: get_option('docs'),
++    version: '>=1.9.1',
++)
++if not doxygen.found()
++    subdir_done()
++endif
++
++doxyfile_data = configuration_data()
++doxyfile_data.set('VERSION', version)
++doxyfile_data.set('PACKAGE', meson.project_name())
++doxyfile_data.set('top_builddir', meson.project_build_root())
++doxyfile_data.set('top_srcdir', meson.project_source_root())
++
++doxyfile = configure_file(
++    input: 'Doxyfile.in',
++    output: 'Doxyfile',
++    configuration: doxyfile_data,
++)
++
++custom_target(
++    'docs',
++    input: doxyfile,
++    output: 'html',
++    command: [doxygen, doxyfile],
++    depend_files: thai_src + headers_src,
++    install: true,
++    install_dir: get_option('docsdir'),
++)
+diff --git a/include/meson.build b/include/meson.build
+new file mode 100644
+index 0000000..d45dd34
+--- /dev/null
++++ b/include/meson.build
+@@ -0,0 +1,22 @@
++headers_src = files(
++    'thai/thailib.h',
++    'thai/thbrk.h',
++    'thai/thcell.h',
++    'thai/thcoll.h',
++    'thai/thctype.h',
++    'thai/thinp.h',
++    'thai/thrend.h',
++    'thai/thstr.h',
++    'thai/thwbrk.h',
++    'thai/thwchar.h',
++    'thai/thwcoll.h',
++    'thai/thwctype.h',
++    'thai/thwinp.h',
++    'thai/thwrend.h',
++    'thai/thwstr.h',
++    'thai/tis.h',
++    'thai/wtt.h',
++)
++install_headers(headers_src, subdir: 'thai')
++
++include_dir = include_directories('.')
+diff --git a/meson.build b/meson.build
+new file mode 100644
+index 0000000..3ca49cf
+--- /dev/null
++++ b/meson.build
+@@ -0,0 +1,47 @@
++project(
++    'libthai',
++    'c',
++    meson_version: '>=1.0.0',
++    version: run_command(files('build-aux/git-version-gen'), check: true).stdout().strip(),
++)
++
++sh = find_program('sh')
++compiler = meson.get_compiler('c')
++datrie = dependency('datrie-0.2')
++
++version = run_command(files('build-aux/git-version-gen'), check: true).stdout().strip()
++meson.add_dist_script(
++    sh,
++    '-c',
++    'echo "@0@" > "$MESON_DIST_ROOT/VERSION"'.format(version),
++)
++meson.add_dist_script(sh, '-c', 'cd "$MESON_DIST_ROOT" && ./autogen.sh')
++meson.add_dist_script(
++    sh,
++    '-c',
++    'cd "$MESON_DIST_ROOT" && rm -r autom4te.cache autogen.sh || true',
++)
++
++LT_CURRENT = 3
++LT_REVISION = 1
++LT_AGE = 3
++
++soversion = LT_CURRENT - LT_AGE
++libversion = '@0@.@1@.@2@'.format(soversion, LT_AGE, LT_REVISION)
++
++# Detect for version-script support
++ld_has_version_script = compiler.has_link_argument(
++    '-Wl,-version-script,@0@'.format(
++        meson.global_source_root() / 'build-aux' / 'test.map',
++    ),
++)
++
++if get_option('buildtype') in ['debug', 'debugoptimized']
++    add_project_arguments('-DNDEBUG', language: ['c'])
++endif
++
++subdir('data')
++subdir('include')
++subdir('src')
++subdir('doc')
++subdir('tests')
+diff --git a/meson_options.txt b/meson_options.txt
+new file mode 100644
+index 0000000..8a213fc
+--- /dev/null
++++ b/meson_options.txt
+@@ -0,0 +1,3 @@
++option('docs', type : 'feature', value : 'auto', description : 'Generate documents with Doxygen')
++option('docsdir', type : 'string', value : 'share/doc/libthai', description : 'Where to install the Doxygen-generated HTML doc')
++option('dict', type : 'boolean', value : true, description : 'Enable dictionary data generation (require libdatrie)')
+diff --git a/src/libthai.c b/src/libthai.c
+index 8065c1f..efd2772 100644
+--- a/src/libthai.c
++++ b/src/libthai.c
+@@ -90,8 +90,10 @@
+
+ #include "thbrk/thbrk-priv.h"
+
+-__attribute__ ((destructor)) void
+-_libthai_on_unload ()
++#if defined (__GNUC__) || defined (__clang__)
++__attribute__ ((destructor))
++#endif
++void _libthai_on_unload ()
+ {
+     brk_free_shared_brk ();
+ }
+diff --git a/src/meson.build b/src/meson.build
+new file mode 100644
+index 0000000..04dc3d7
+--- /dev/null
++++ b/src/meson.build
+@@ -0,0 +1,49 @@
++thai_src = files(
++    'thbrk/brk-common.c',
++    'thbrk/brk-common.h',
++    'thbrk/brk-ctype.c',
++    'thbrk/brk-ctype.h',
++    'thbrk/brk-maximal.c',
++    'thbrk/brk-maximal.h',
++    'thbrk/thbrk.c',
++    'thcell/thcell.c',
++    'thcoll/cweight.c',
++    'thcoll/cweight.h',
++    'thcoll/thcoll.c',
++    'thctype/thctype.c',
++    'thctype/wtt.c',
++    'thinp/thinp.c',
++    'thrend/thrend.c',
++    'thstr/thstr.c',
++    'thwbrk/thwbrk.c',
++    'thwchar/thwchar.c',
++    'thwctype/thwctype.c',
++    'thwstr/thwstr.c',
++    'libthai.c',
++)
++
++thai = library(
++    'thai',
++    thai_src,
++    install: true,
++    c_args: ['-DDICT_DIR="@0@"'.format(dict_dir)],
++    dependencies: [datrie],
++    version: libversion,
++    soversion: soversion,
++    include_directories: include_dir,
++)
++libthai_dep = declare_dependency(
++    include_directories: include_dir,
++    link_with: thai,
++)
++meson.override_dependency('libthai', libthai_dep)
++
++pkg = import('pkgconfig')
++pkg.generate(
++    thai,
++    filebase: 'libthai',
++    name: 'libthai',
++    description: 'Thai support library',
++    version: version,
++    requires_private: ['datrie-0.2'],
++)
+diff --git a/tests/meson.build b/tests/meson.build
+new file mode 100644
+index 0000000..c82ffe4
+--- /dev/null
++++ b/tests/meson.build
+@@ -0,0 +1,40 @@
++fs = import('fs')
++
++tests = ['thctype', 'thcell', 'thinp', 'thrend', 'thstr', 'thwchar']
++
++foreach item : tests
++    exe = executable(
++        'test_' + item,
++        'test_@0@.c'.format(item),
++        dependencies: [libthai_dep],
++    )
++    test(item, exe)
++endforeach
++
++# thcoll
++thsort = executable('thsort', 'thsort.c', dependencies: [libthai_dep])
++test(
++    'thcoll',
++    find_program('test-thcoll.sh'),
++    depends: [thsort],
++    env: {
++        'srcdir' : meson.current_source_dir(),
++        'top_builddir' : meson.project_build_root(),
++    },
++)
++
++if get_option('dict')
++    foreach item : ['thbrk', 'thwbrk']
++        exe = executable(
++            'test_' + item,
++            'test_@0@.c'.format(item),
++            dependencies: [libthai_dep, dependency('iconv')],
++        )
++        test(
++            item,
++            exe,
++            depends: [tri],
++            env: {'LIBTHAI_DICTDIR' : fs.parent(tri.full_path())},
++        )
++    endforeach
++endif
