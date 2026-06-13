@@ -79,7 +79,7 @@ subproject('pango', default_options: [
     'introspection=' + introspection,
     'fontconfig=disabled',
     'cairo=enabled',
-    'freetype=disabled',
+    'freetype=enabled',
     'build-testsuite=false',
     'build-examples=false',
     'libthai=disabled',
@@ -132,5 +132,7 @@ subproject('gtksourceview', default_options: [
     'build-testsuite=false',
     'vapi=false',
 ])
+
+subdir('gir')
 
 meson.add_install_script(join_paths(meson.current_source_dir(), 'scripts', 'fix-gdk-pixbuf-rpath.sh'))

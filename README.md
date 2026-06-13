@@ -20,6 +20,17 @@ To disable introspection (typelib) to be build, add the option `-Dintrospection=
 
 You can take a build from CI (GitHub actions). This build is supposed to be installed as `/opt/adwaita`.
 
+## Caveats
+
+If you installed Python packages before, using dependencies from Homebrew, make sure
+to clear the cache, so C-based dependencies (pycairo, pygobject) are compiled with
+libraries from `/opt/adwaita`:
+
+```sh
+poetry clear cache --all
+pip cache purge
+```
+
 ## Wish list
 
 - [x] Introspection
