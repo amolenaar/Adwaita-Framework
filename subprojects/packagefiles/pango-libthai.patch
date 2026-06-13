@@ -1,0 +1,14 @@
+diff --git a/meson.build b/meson.build
+index 4fa716e..9719f90 100644
+--- a/meson.build
++++ b/meson.build
+@@ -239,7 +239,8 @@ if thai_dep.found()
+   pango_conf.set('HAVE_LIBTHAI', 1)
+   pango_deps += thai_dep
+
+-  if cc.has_function('th_brk_find_breaks', dependencies: thai_dep)
++  if thai_dep.type_name() == 'internal' or \
++     cc.has_function('th_brk_find_breaks', dependencies: thai_dep)
+     pango_conf.set('HAVE_TH_BRK_FIND_BREAKS', 1)
+   endif
+ endif

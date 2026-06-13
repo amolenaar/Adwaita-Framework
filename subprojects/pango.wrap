@@ -7,7 +7,7 @@ source_fallback_url = https://github.com/mesonbuild/wrapdb/releases/download/pan
 wrapdb_version = 1.56.4-1
 
 # Added by us
-diff_files = pango-typelib.patch
+diff_files = pango-typelib.patch, pango-libthai.patch
 
 [provide]
 dependency_names = pango, pangoft2, pangoxft, pangowin32, pangocairo

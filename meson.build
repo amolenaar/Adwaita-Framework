@@ -75,6 +75,12 @@ subproject('harfbuzz', default_options: [
   'freetype=enabled',
   'cairo=enabled',
 ])
+subproject('libdatrie', default_options: [
+  'docs=disabled',
+])
+subproject('libthai', default_options: [
+  'docs=disabled',
+])
 subproject('pango', default_options: [
     'introspection=' + introspection,
     'fontconfig=disabled',
@@ -82,7 +88,7 @@ subproject('pango', default_options: [
     'freetype=enabled',
     'build-testsuite=false',
     'build-examples=false',
-    'libthai=disabled',
+    'libthai=enabled',
 ])
 subproject('gdk-pixbuf', default_options: [
     'glycin=disabled',
