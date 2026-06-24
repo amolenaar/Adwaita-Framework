@@ -1,25 +1,18 @@
-## TODO: compile cairo-1.0.gir freetype2-2.0.gir
 # Compile and install gir "stubs".
 # Those stubs are normally provided by gobject-introspection.
-
-# gir_files = [
-#   {'name': 'freetype2', 'file': 'freetype2-2.0.gir' },
-#   {'name': 'cairo', 'file': 'cairo-1.0.gir'},
-# ]
 
 girdir = join_paths(get_option('datadir'), 'gir-1.0')
 typelibdir = join_paths(get_option('libdir'), 'girepository-1.0')
 
 gir_files = ['cairo-1.0.gir', 'freetype2-2.0.gir']
 
-# install_gir_files = []
-# foreach gir: gir_files
-#   install_gir_files += gir
-# endforeach
-
 install_data(gir_files, install_dir: girdir)
 
 gircompiler = find_program('g-ir-compiler')
+
+girepository_dep = dependency('girepository-2.0')
+
+girepository_girdir = girepository_dep.get_variable('girdir')
 
 gircompiler_command = [
   gircompiler,
@@ -27,12 +20,11 @@ gircompiler_command = [
   '@INPUT@',
   '--includedir', meson.current_build_dir(),
   '--includedir', meson.current_source_dir(),
-  '--includedir', join_paths(meson.project_build_root(), 'subprojects' , 'glib-2.88.1', 'girepository', 'introspection'),
+  '--includedir', girepository_girdir,
 ]
 
-typelibs = []
 foreach gir: gir_files
-  typelibs += custom_target(
+  custom_target(
     input: gir,
     output: '@BASENAME@.typelib',
     command: gircompiler_command,
