@@ -27,6 +27,7 @@ gircompiler_command = [
   '@INPUT@',
   '--includedir', meson.current_build_dir(),
   '--includedir', meson.current_source_dir(),
+  '--includedir', join_paths(meson.project_build_root(), 'subprojects' , 'glib-2.88.1', 'girepository', 'introspection'),
 ]
 
 typelibs = []
