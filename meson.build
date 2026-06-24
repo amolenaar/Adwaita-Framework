@@ -133,6 +133,9 @@ subproject('gtksourceview', default_options: [
     'vapi=false',
 ])
 
+subproject('default-icon-theme')
+subproject('adwaita-icon-theme')
+
 subdir('gir')
 
 meson.add_install_script(join_paths(meson.current_source_dir(), 'scripts', 'fix-gdk-pixbuf-rpath.sh'))

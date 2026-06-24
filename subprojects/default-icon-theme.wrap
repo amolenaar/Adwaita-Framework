@@ -1,0 +1,5 @@
+[wrap-git]
+directory = default-icon-theme
+url = https://gitlab.freedesktop.org/xdg/default-icon-theme.git
+revision = v0.18
+depth = 1
