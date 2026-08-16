@@ -5,6 +5,7 @@ project(
   meson_version : '>= 1.1.0',
   default_options: [
     'buildtype=release',
+    'prefix=/opt/adwaita',
   ]
 )
 
