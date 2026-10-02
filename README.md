@@ -35,7 +35,7 @@ pip cache purge
 
 - [x] Introspection
 - [ ] Add glycin image loader (?)
-- [ ] Enable Vulkan GDK backend (mesa)
+- [ ] Enable Vulkan GDK backend (mesa, macOS 26+)
 - [x] Enable Accesskit
 - [ ] Package with readme
 - [ ] Test with PyInstaller

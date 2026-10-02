@@ -1,6 +1,6 @@
 [wrap-git]
 url = https://gitlab.gnome.org/GNOME/gtk.git
-revision = f4781e2bcb14a9bbb57afa50619e28ed326570ed
+revision = 7c4032f2ff0f7f4e44e334b2725c9405beab6c43
 depth = 1
 diff_files = gtk-typelib.patch
 
