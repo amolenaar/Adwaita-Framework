@@ -1,6 +1,7 @@
 subprojects/*/
 subprojects/.wraplock
 subprojects/gvdb.wrap
+subprojects/ministream.wrap
 subprojects/sassc.wrap
 !subprojects/packagefiles/
 _install/
