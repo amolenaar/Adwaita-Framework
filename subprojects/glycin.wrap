@@ -1,0 +1,6 @@
+[wrap-git]
+url = https://gitlab.gnome.org/GNOME/glycin.git
+# 2.2.1
+revision = 6b7226d495755772bcd4bcfb5c8051a446e625ef
+depth = 1
+diff_files = glycin-cargo-pkg-config.patch

@@ -11,6 +11,7 @@ project(
 
 # Introspection requires some form of gobject-introspection to be installed
 introspection = get_option('introspection').enabled() ? 'enabled' : 'disabled'
+introspection_bool = get_option('introspection').enabled() ? 'true' : 'false'
 
 # The base: GLib
 subproject('libffi')
@@ -41,7 +42,7 @@ subproject('icu')
 subproject('libepoxy')
 
 subproject('libxmlb', default_options: [ # for appstream
-  'introspection=' + (introspection == 'disabled' ? 'false' : 'true'),
+  'introspection=' + introspection_bool,
   'lzma=disabled',
   'gtkdoc=false',
   'tests=false',
@@ -85,18 +86,25 @@ subproject('pango', default_options: [
     'build-examples=false',
     'libthai=disabled',
 ])
+subproject('glycin', default_options: [
+  'introspection=' + introspection_bool,
+  'libglycin=true',
+  'libglycin-gtk4=false',
+  'vapi=false',
+  'tests=false',
+])
 subproject('gdk-pixbuf', default_options: [
-    'glycin=disabled',
+    'glycin=enabled',
     'documentation=false',
     'man=false',
     'introspection=' + introspection,
     'relocatable=true',
     'tests=false',
-    'builtin_loaders=all',
-    'png=enabled',
-    'tiff=enabled',
-    'jpeg=enabled',
-    'gif=enabled',
+    # 'builtin_loaders=all',
+    # 'png=enabled',
+    # 'tiff=enabled',
+    # 'jpeg=enabled',
+    # 'gif=enabled',
 ])
 subproject('accesskit-c')
 

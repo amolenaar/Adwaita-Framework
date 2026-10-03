@@ -1,0 +1,22 @@
+diff --git a/meson.build b/meson.build
+--- a/meson.build
++++ b/meson.build
+@@ -39,14 +39,10 @@
+
+ cargo_bin = find_program('cargo')
+
+-if get_option('libglycin') and (get_option('libglycin-gtk4') or get_option('glycin-thumbnailer'))
+-  # Let the libglycin-gtk4 or glycin-thumbnailer build find the previously
+-  # built libglycin
+-  cargo_env.prepend(
+-    'PKG_CONFIG_PATH',
+-    meson.project_build_root() / 'meson-uninstalled',
+-  )
+-endif
++cargo_env.prepend(
++  'PKG_CONFIG_PATH',
++  meson.global_build_root() / 'meson-uninstalled',
++)
+
+ if get_option('profile') == 'release'
+   rust_target = 'release'
