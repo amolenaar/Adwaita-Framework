@@ -39,17 +39,6 @@ function fix_loader_paths() {
   done
 }
 
-function fix_pixbuf_loader_paths() {
-  local lib=$1
-  local locallibdir=$ROOT/lib
-  log Fixing $lib
-  for dep in `resolve_deps $lib`; do
-    local new_dep="@loader_path/../../..${dep/#$locallibdir/}"
-    log "|  $dep -> $new_dep"
-    install_name_tool -change $dep $new_dep $lib
-  done
-}
-
 find $ROOT/bin -type f | \
 while read f; do
   fix_executable_paths $f
