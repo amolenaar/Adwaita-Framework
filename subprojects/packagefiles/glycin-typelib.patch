@@ -1,0 +1,13 @@
+diff --git a/libglycin/meson.build b/libglycin/meson.build
+index 5521a89..17bcdfc 100644
+--- a/libglycin/meson.build
++++ b/libglycin/meson.build
+@@ -224,7 +224,7 @@ foreach package : packages
+         # Generate .gir and .typelib
+         libglycin_gir = gnome.generate_gir(
+             libglycin_shim,
+-            dependencies: extra_gir_deps + libglycin_copy_library_as_dep,
++            dependencies: extra_gir_deps + libglycin_copy_library_as_dep + [dependency('girepository-2.0')],
+             sources: [f'include/glycin@suffix@.h', libglycin_copy_library],
+             nsversion: '2',
+             namespace: f'Gly@namespace_suffix@',

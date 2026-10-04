@@ -1,0 +1,17 @@
+diff --git a/libglycin/meson.build b/libglycin/meson.build
+index 5521a89..f4809e1 100644
+--- a/libglycin/meson.build
++++ b/libglycin/meson.build
+@@ -284,6 +284,12 @@ foreach package : packages
+ 
+ endforeach
+ 
++libglycin_dep = declare_dependency(link_with: global_libglycin,
++    include_directories: 'include/',
++    dependencies: [libglycin_copy_library_as_dep]
++)
++meson.override_dependency(libglycin_target_name, libglycin_dep)
++
+ if get_option('python_tests')
+     test('libglycin-python3', find_program('../tests/libglycin.py'))
+ endif

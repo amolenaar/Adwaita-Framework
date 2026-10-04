@@ -91,7 +91,7 @@ subproject('glycin', default_options: [
   'libglycin=true',
   'libglycin-gtk4=false',
   'vapi=false',
-  'tests=false',
+  'tests=false'
 ])
 subproject('gdk-pixbuf', default_options: [
     'glycin=enabled',
@@ -100,11 +100,6 @@ subproject('gdk-pixbuf', default_options: [
     'introspection=' + introspection,
     'relocatable=true',
     'tests=false',
-    # 'builtin_loaders=all',
-    # 'png=enabled',
-    # 'tiff=enabled',
-    # 'jpeg=enabled',
-    # 'gif=enabled',
 ])
 subproject('accesskit-c')
 
