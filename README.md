@@ -36,6 +36,7 @@ pip cache purge
 - [x] Introspection
 - [x] Add glycin image loader
 - [ ] Enable Vulkan GDK backend (mesa, macOS 26+)
+- [ ] Do we need fontconfig? It's needed for freetype support to Pango
 - [x] Enable Accesskit
 - [ ] Package with readme
 - [ ] Test with PyInstaller
