@@ -24,7 +24,11 @@ subproject('glib', default_options: [
   'tests=false',
 ])
 
-subproject('zstd')
+subproject('zstd', default_options: [
+  'bin_programs=false',
+  'bin_tests=false',
+  'bin_contrib=false',
+])
 subproject('libwebp')
 subproject('libfyaml')
 subproject('libxml2')
