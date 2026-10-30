@@ -6,7 +6,7 @@ and [libadwaita](https://gnome.pages.gitlab.gnome.org/libadwaita/) on macOS.
 We need some tools from Homebrew:
 
 ```sh
-brew install cargo-c gobject-introspection
+brew install cargo-c rust gobject-introspection
 ```
 
 Then, all can be built:
